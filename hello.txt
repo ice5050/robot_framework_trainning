@@ -2,15 +2,23 @@
 Library    Selenium2Library
 
 *** Variables ***
-
+${GOOGLE URL}    http://www.google.com
 
 *** Testcases ***
 Worldcup hilight
-  Open Browser    http://www.google.com
-  Input Text      gbqfq    worldcup hilight ไทย
-  Click Button    gbqfb
-  Wait Until Page Contains    คลิปไฮไลท์ฟุตบอลโลก 2014
-  Close Browser
+  เปิดบราวเซอร์    http://www.google.com
+  ใส่คำค้นหา    worldcup hilight ไทย
+  น่าจะเห็น    worldcup hilight ไทย
 
 *** Keywords ***
+เปิดบราวเซอร์
+  Open Browser    ${GOOGLE URL}
 
+ใส่คำค้นหา
+  [Arguments]    ${Keyword}
+  Input Text      gbqfq    ${Keyword}
+  Click Button    gbqfb
+
+น่าจะเห็น
+  [Arguments]    ${Expected result}
+  Wait Until Page Contains      ${Expected result}
